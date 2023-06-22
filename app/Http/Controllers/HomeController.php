@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $page_name = "dashboard";
         $user = Auth::user();
         $userrole = Userrole::all();
         $department = Department::all();
@@ -44,7 +45,7 @@ class HomeController extends Controller
         //     }
         // });
 
-        return view('admin.dashboard', compact('sidebar', 'user', 'userrole', 'department', 'country', 'state', 'productdetails'));
+        return view('admin.dashboard', compact('sidebar', 'user', 'userrole', 'department', 'country', 'state', 'productdetails', 'page_name'));
     }
 
     public function get_product(Request $request)

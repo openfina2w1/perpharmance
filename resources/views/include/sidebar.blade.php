@@ -10,7 +10,7 @@
     @if($sidebar =='self-analyze-sidebar')
         <ul>
             <li class="active">
-                <a href="self-analyze">
+                <a href="{{ url('self-analyze') }}">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span>Self Analyze</span>
                 </a>
@@ -24,13 +24,13 @@
         <div class="analysis">
             <div class="analysis-section">
                 <h4>Product</h4>
-                <div class="custom-select">
-                 <select name="product" id="product">
-                    <option value="Product 1" {{ isset($self_analyze_user_session) ? $json['product'] == 'Product 1' ? 'selected' : '' : '' }}>Product 1</option>
-                    <option value="Product 2" {{ isset($self_analyze_user_session) ? $json['product'] == 'Product 2' ? 'selected' : '' : '' }}>Product 2</option>
-                    <option value="Product 3" {{ isset($self_analyze_user_session) ? $json['product'] == 'Product 3' ? 'selected' : '' : '' }}>Product 3</option>
+                <!-- <div class="custom-select"> -->
+                 <select name="product" id="product" placeholder="Select Product" multiple>
+                    <option value="Product 1" {{ isset($self_analyze_user_session) ? in_array('Product 1', $json['product']) ? 'selected' : '' : '' }}>Product 1</option>
+                    <option value="Product 2" {{ isset($self_analyze_user_session) ? in_array('Product 2', $json['product']) ? 'selected' : '' : '' }}>Product 2</option>
+                    <option value="Product 3" {{ isset($self_analyze_user_session) ? in_array('Product 3', $json['product']) ? 'selected' : '' : '' }}>Product 3</option>
                   </select>   
-                </div>
+                <!-- </div> -->
             </div>
             <div class="analysis-section">
                 <h4><label for="startDate">From Date</label></h4>
@@ -98,30 +98,38 @@
         </div> 
     @else
     <ul>
-            <li class="active">
+            <li class="{{ $page_name == 'dashboard' ? 'active' : '' }}">
                 <a href="dashboard">
                 <i class="fa fa-home stroke-icon" aria-hidden="true"></i>
                     <span>Home</span>
                     <span class="indication">5</span>
                 </a>
             </li>
-            <li><a href="my-sessions">
-                <i class="fa fa-tablet stroke-icon" aria-hidden="true"></i>
-                <span>My Sessions</span>
-                <span class="indication">3</span>
-            </a></li>
-            <li><a href="self-analyze">
-                <i class="fa fa-pie-chart stroke-icon" aria-hidden="true"></i>
-                <span>Self Analyze</span>
-            </a></li>
-            <li><a href="#">
-                <i class="fa fa-pie-chart stroke-icon" aria-hidden="true"></i>
-                <span>Smart Analyze</span>
-            </a></li>
-            <li><a href="#">
-                <i class="fa fa-upload stroke-icon"></i>
-                <span>Upload Data</span>
-            </a></li>
+            <li class="{{ $page_name == 'my_sessions' ? 'active' : '' }}">
+                <a href="my-sessions">
+                    <i class="fa fa-tablet stroke-icon" aria-hidden="true"></i>
+                    <span>My Sessions</span>
+                    <span class="indication">3</span>
+                </a>
+            </li>
+            <li class="{{ $page_name == 'self_analyze' ? 'active' : '' }}">
+                <a href="self-analyze">
+                    <i class="fa fa-pie-chart stroke-icon" aria-hidden="true"></i>
+                    <span>Self Analyze</span>
+                </a>
+            </li>
+            <li class="{{ $page_name == 'smart_analyze' ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-pie-chart stroke-icon" aria-hidden="true"></i>
+                    <span>Smart Analyze</span>
+                </a>
+            </li>
+            <li class="{{ $page_name == 'upload_data' ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-upload stroke-icon"></i>
+                    <span>Upload Data</span>
+                </a>
+            </li>
         </ul>
     @endif
 </div>

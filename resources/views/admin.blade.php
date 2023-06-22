@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="{{ asset('admin/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/sweetalert2.min.css') }}">
+    <!-- multiselect -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <!-- multiselect -->
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+    <!-- Date Piceker-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css">
+    <!-- Date Piceker-->
 
 </head>
     <body id="widget">
@@ -37,52 +42,14 @@
         <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script> -->
         <script src="{{ asset('admin/js/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('admin/js/scripts.js') }}"></script>
-        <!-- End custom js for this page-->
-        <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script> -->
-        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
-
-
-        <script>
-            $("#btnSave").click(function() {   
-                // var nestedChild = document.getElementById('btnSave');
-                // nestedChild.remove();  
-                html2canvas(document.querySelector("#widget")).then(canvas => {
-                    // document.body.appendChild(canvas);
-                    Canvas2Image.saveAsJPEG(canvas);
-                    document.body.removeChild(canvas);
-                    // document.querySelector('#content_head').insertAdjacentHTML(
-                    //     'afterend',
-                    //     `<div class="save-button" id="save_button">
-                    //         <a id="btnSave" style="cursor:pointer"><span>Save Session</span></a>
-                    //     </div> `      
-                    // )
-                });
-            });
-
-            function addHtml () {
-                document.querySelector('#content_head').insertAdjacentHTML(
-                    'afterend',
-                    `<div class="save-button" id="save_button">
-                        <a id="btnSave" style="cursor:pointer"><span>Save Session</span></a>
-                    </div> `      
-                )
-            }
-
-            // html2canvas(document.querySelector("#widget")).then(canvas => {
-            //     document.body.appendChild(canvas)
-            //     // document.querySelector("#result_div").append(canvas);
-            //     var cvs = document.querySelector("canvas");
-            //     var btn = document.querySelector("#btnSave");
-            //     btn.href = cvs.toDataURL();
-            //     var d = new Date();
-            //     var time = d.getTime();
-            //     btn.download = time+".jpg";
-            // });
-
-            // new MultiSelectTag('product')  
-        </script>
+        <!-- End custom js for this page-->        
+        <!-- Date Piceker-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js"></script>
+        <!-- Date Piceker-->
+        <!-- multiselect -->
+        <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+        <!-- multiselect -->
 
     </body>
 </html>

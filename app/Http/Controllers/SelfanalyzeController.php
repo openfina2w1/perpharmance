@@ -8,13 +8,15 @@ use App\Usersessionscomments;
 use App\Selfanalyzeusersession;
 use DateTime;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class SelfanalyzeController extends Controller
 {
     function index() {
         $productdetails = Productdetails::orderBy('proprietary_name', 'ASC')->paginate(10);
         $sidebar = "default-sidebar";
-        return view('admin.selfanalyze.slafanalyze', compact('sidebar', 'productdetails'));
+        $page_name = "self_analyze";
+        return view('admin.selfanalyze.slafanalyze', compact('sidebar', 'productdetails', 'page_name'));
     }
 
     function self_analyze() {
@@ -26,6 +28,7 @@ class SelfanalyzeController extends Controller
         //     $comments = Usersessionscomments::where('session_id', $user_self_analyze_session_id)->get();
         // }
 
+        $page_name = "self_analyze";
         Session::pull('user_self_analyze_session_id');
         Session::put('user_self_analyze_session_id', now()->getTimestampMs());
         $user_self_analyze_session_id = Session::get('user_self_analyze_session_id');
@@ -35,7 +38,7 @@ class SelfanalyzeController extends Controller
         $sidebar = "self-analyze-sidebar";
         $self_analyze_user_session = null;
         $session_id = "";
-        return view('admin.selfanalyze.selfanalyzedetails', compact('sidebar','productdetails', 'comments', 'self_analyze_user_session', 'session_id'));
+        return view('admin.selfanalyze.selfanalyzedetails', compact('sidebar','productdetails', 'comments', 'self_analyze_user_session', 'session_id', 'page_name'));
     }
 
     function self_analyze_by_session($user_self_analyze_session_id){
@@ -69,7 +72,7 @@ class SelfanalyzeController extends Controller
     }
 
     public function get_all_comment_by_session($user_self_analyze_session_id){
-        $comments = Usersessionscomments::where('session_id', $user_self_analyze_session_id)->get();
+        $comments = Usersessionscomments::where('session_id', $user_self_analyze_session_id)->orderBy('created_at', 'DESC')->get();
 
         $html = "";
         if(count($comments) > 0){
@@ -99,11 +102,14 @@ class SelfanalyzeController extends Controller
     function save_user_session(Request $request) {
         $user_self_analyze_session_id = Session::get('user_self_analyze_session_id');
         $session_data = Selfanalyzeusersession::where('session_id', $user_self_analyze_session_id)->count();
+        // echo $user_id = Auth::id();exit;
         if($session_data > 0){
             $session_data = Selfanalyzeusersession::where('session_id', $user_self_analyze_session_id)->first();
             $session = Selfanalyzeusersession::findOrFail($session_data['id']);
             $session->session_id = $user_self_analyze_session_id;
             $session->filter_data = $request['filter_obj'];
+            $session->session_name = $request['session_name'];
+            $session->updated_by = Auth::id();;
             if($session->update()){
                 return response()->json([
                     'status' => 'success',
@@ -118,7 +124,9 @@ class SelfanalyzeController extends Controller
         } else{
             if(Selfanalyzeusersession::create([
                 'session_id' => $user_self_analyze_session_id,
-                'filter_data' => $request['filter_obj']
+                'filter_data' => $request['filter_obj'],
+                'session_name' => $request['session_name'],
+                'created_by' => Auth::id()
             ])){
                 return response()->json([
                     'status' => 'success',
@@ -134,11 +142,14 @@ class SelfanalyzeController extends Controller
     }
 
     function save_user_session_update(Request $request) {
+        // $user_id = Auth::id();
         $user_self_analyze_session_id = Session::get('user_self_analyze_session_id');
         $session_data = Selfanalyzeusersession::where('session_id', $user_self_analyze_session_id)->first();
         $session = Selfanalyzeusersession::findOrFail($session_data['id']);
         $session->session_id = $user_self_analyze_session_id;
         $session->filter_data = $request['filter_obj'];
+        $session->session_name = $request['session_name'];
+        $session->updated_by = Auth::id();;
         if($session->update()){
             return response()->json([
                 'status' => 'success',

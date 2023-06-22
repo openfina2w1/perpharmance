@@ -5,7 +5,7 @@
         <div class="page-top-cont">
             <div class="page-title mb-4" id="content_head"><h2>Self Analyze - New User Session</h2></div>
             <div class="save-button" id="save_button">
-                <a id="btn_save_session" style="cursor:pointer"><span>Save Session</span></a>
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor:pointer"><span>Save Session</span></a>
             </div> 
         </div>
         <div class="errormsg response_error" style="display:none"></div>
@@ -82,4 +82,28 @@
         </div>
         
     </div>
+    <!-- Modal -->
+    <div class="modal modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog card">
+            <div class="modal-content ">
+                <div class="modal-header card-header">
+                    <h5 class="modal-title card-title" id="exampleModalLabel">Save Session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body edit-popup">
+                    <div class="container-fluid">
+                        <div class="row mb-3">
+                            <label for="session_name" class="form-label">Session Name <span class="small text-danger">*</span></label>
+                            <input type="text" class="form-control" id="session_name" name="session_name" value="{{ isset($self_analyze_user_session->session_name) ? $self_analyze_user_session->session_name : '' }}" placeholder="Session Name">
+                            <div class="session_name_error cls_err"></div>
+                        </div>
+                        <div class="row mb-3">                            
+                            <button type="button" class="btn btn-primary w-25" id="btn_save_session">Save</button>
+                        </div> 
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <!-- Modal End-->
 @endsection

@@ -921,3 +921,28 @@ span.photo {
 
 
 
+/***************** added on 21062023******************/
+.choices__list { color: #212529;}
+.choices__list--multiple .choices__item {background-color: #173ead;border: 1px solid #173ead;}
+.choices__inner {padding: 3.5px 7.5px 3.5px;}
+.choices__inner { border-radius: 0.375rem;}
+.choices:after {
+    content: '\f107';
+    font-family: "FontAwesome";
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 0.5rem 1em;
+    color: #000000;
+    transition: .25s all ease;
+    cursor: pointer;
+}
+
+.choices__list--multiple .choices__item {padding: 2px 6px; font-size: 11px;}
+
+.choices__input {font-size: 12px;margin: 0;}
+.choices__list--dropdown { z-index: 99;}
+.choices__list--dropdown .choices__item--selectable.is-highlighted {background-color: #e3e9fa;}
+.choices__inner {
+    border-radius: 0.375rem;
+}

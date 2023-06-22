@@ -310,62 +310,74 @@ $(document).ready(function(){
     });
 
     $(document).on('click', '#btn_save_session', function() {
-        $(".btn_save_session").prop('disabled', true);
-        $(".btn_save_session").html("Please wait...");
+        $("#btn_save_session").prop('disabled', true);
+        $("#btn_save_session").html("Please wait...");
         $(".cls_err").html("");
-        $(".invalid-feedback").hide();
 
-        var session_id =  $("#session_id").val();
-        var product =  $("#product").val();
-        var start_date =  $("#start_date").val();
-        var end_date =  $("#end_date").val();
-        var demographic =  $("#demographic").val();
-        var kpi =  $("#kpi").val();
-        var region =  $("#region").val();
-        var prescriber_specialty =  $("#prescriber_specialty").val();
+        var session_name =  $("#session_name").val();
+        if(session_name == ""){
+            $(".session_name_error").html("Session name is required");
+            $("#btn_save_session").prop('disabled', false);
+            $("#btn_save_session").html("Save");
+        } else{
+            var session_id =  $("#session_id").val();
+            var product =  $("#product").val();
+            var start_date =  $("#start_date").val();
+            var end_date =  $("#end_date").val();
+            var demographic =  $("#demographic").val();
+            var kpi =  $("#kpi").val();
+            var region =  $("#region").val();
+            var prescriber_specialty =  $("#prescriber_specialty").val();
 
-        var filter_obj = JSON.stringify({ "product": product, "start_date": start_date, "end_date": end_date, "demographic": demographic, "kpi": kpi, "region": region, "prescriber_specialty": prescriber_specialty });
-        var url = "save-user-session"
-        var method = "POST";
-        var base_url = window.location.origin;
-        
-        if(session_id != ""){
-            url = base_url+"/save-user-session-update/"+session_id;
-            var method = "PUT";
-        }
-
-        $.ajax({
-            url : url,
-            type : method,
-            data : { "_token": $('meta[name="csrf-token"]').attr('content'), "filter_obj": filter_obj },
-            dataType : 'json',
-            success:function (response) {
-                $(".btn_save_session").prop('disabled', false);
-                $(".btn_save_session").html("Save Session");
-                if(response.status == 'success'){
-                    $(".response_success").html(response.message);
-                    $(".response_success").show();
-                } else{
-                    $(".response_error").html(response.message);
-                    $(".response_error").show();
-                }
-            },
-            error: function(xhr, status, error) {
-                $(".btn_save_session").prop('disabled', false);
-                $(".btn_save_session").html("Save Session");
-                $(".response_error").html("Something wrong. Please try again!");
-                $(".response_error").show();
-            },
-            complete : function() {
-                setTimeout(function(){
-                    $(".response_success").hide();
-                    $(".response_error").hide();
-                }, 5000);
+            var filter_obj = JSON.stringify({ "product": product, "start_date": start_date, "end_date": end_date, "demographic": demographic, "kpi": kpi, "region": region, "prescriber_specialty": prescriber_specialty });
+            var url = "save-user-session"
+            var method = "POST";
+            var base_url = window.location.origin;
+            
+            if(session_id != ""){
+                url = base_url+"/save-user-session-update/"+session_id;
+                var method = "PUT";
             }
-        });
+
+            $.ajax({
+                url : url,
+                type : method,
+                data : { "_token": $('meta[name="csrf-token"]').attr('content'), "session_name": session_name, "filter_obj": filter_obj },
+                dataType : 'json',
+                success:function (response) {
+                    $("#btn_save_session").prop('disabled', false);
+                    $("#btn_save_session").html("Save");
+                    if(response.status == 'success'){
+                        $('#exampleModal').modal('hide')
+                        $(".response_success").html(response.message);
+                        $(".response_success").show();
+                    } else{
+                        $(".response_error").html(response.message);
+                        $(".response_error").show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $("#btn_save_session").prop('disabled', false);
+                    $("#btn_save_session").html("Save");
+                    $(".response_error").html("Something wrong. Please try again!");
+                    $(".response_error").show();
+                },
+                complete : function() {
+                    setTimeout(function(){
+                        $(".response_success").hide();
+                        $(".response_error").hide();
+                    }, 5000);
+                }
+            });
+        }
     });
 
-    $('.selectpicker').selectpicker();
+    var multipleCancelButton = new Choices('#product', {
+        removeItemButton: true,
+        maxItemCount:5,
+        searchResultLimit:5,
+        renderChoiceLimit:5
+    });
     
 });
 
@@ -412,3 +424,24 @@ function loadMoreData(page){
 }
 
 /** Infinite scroll pagination - End */
+
+$(function () {
+    var sd = new Date(), ed = new Date();
+  
+    $('#start_date').datetimepicker({ 
+      pickTime: false, 
+      format: "YYYY/MM/DD", 
+      defaultDate: sd, 
+      maxDate: ed 
+    });
+  
+    $('#end_date').datetimepicker({ 
+      pickTime: false, 
+      format: "YYYY/MM/DD", 
+      defaultDate: ed, 
+      minDate: sd 
+    });
+
+    //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
+    bindDateRangeValidation($("#form"), 'start_date', 'end_date');
+});

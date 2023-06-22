@@ -16,7 +16,10 @@ class CreateSelfAnalyzeUserSessionTable extends Migration
         Schema::create('self_analyze_user_session', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('session_id', 100);
+            $table->string('session_name', 150);
             $table->text('filter_data');
+            $table->string('created_by', 50);
+            $table->string('updated_by', 50);
             $table->timestamps();
         });
     }

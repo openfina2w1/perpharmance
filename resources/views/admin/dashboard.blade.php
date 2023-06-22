@@ -392,6 +392,6 @@
               
               </div>
             </div>
-          </div>
-        <!-- Modal End-->
+        </div>
+    <!-- Modal End-->
 @endsection

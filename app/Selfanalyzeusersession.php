@@ -10,6 +10,9 @@ class Selfanalyzeusersession extends Model
 
     protected $fillable = [
         'session_id',
-        'filter_data'
+        'session_name',
+        'filter_data',
+        'created_by',
+        'updated_by'
     ];
 }
