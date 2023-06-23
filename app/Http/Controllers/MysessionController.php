@@ -15,6 +15,6 @@ class MysessionController extends Controller
         $sidebar = "default-sidebar";
         $page_name = "my_sessions";
         $self_analyze_user_sessions = Selfanalyzeusersession::where('created_by', $user_id)->get();
-        return view('admin.mysession.mysession', compact('sidebar', 'self_analyze_user_sessions', 'page_name'));
+        return view('admin.mysession.mysession', compact('sidebar', 'self_analyze_user_sessions', 'productdetails', 'page_name'));
     }
 }

@@ -378,6 +378,44 @@ $(document).ready(function(){
         searchResultLimit:5,
         renderChoiceLimit:5
     });
+
+    // $('#brand').select2({
+    //     placeholder: 'Brand',
+    //     allowClear: true,
+    //     // data: [
+    //     //   { id: '1', text: 'Option 1' },
+    //     //   { id: '2', text: 'Option 2' },
+    //     //   { id: '3', text: 'Option 3' },
+    //     // ]
+    //     ajax: {
+    //         url: 'path/to/your/data', // Replace with your data source URL
+    //         dataType: 'json',
+    //         delay: 250,
+    //         processResults: function(data) {
+    //           return {
+    //             results: data
+    //           };
+    //         },
+    //         cache: true
+    //       },
+    //       minimumInputLength: 1
+    // });
+
+    $("#brand").select2({
+        ajax: {
+            url: 'get-product', // Replace with your data source URL
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                var result = data?.data?.data.map(person => ({ id: person.proprietary_name, text: person.proprietary_name }));
+                console.log(result)
+                return {
+                    results: result
+                };
+            },
+            cache: true
+        },
+    });
     
 });
 
@@ -445,3 +483,27 @@ $(function () {
     //passing 1.jquery form object, 2.start date dom Id, 3.end date dom Id
     bindDateRangeValidation($("#form"), 'start_date', 'end_date');
 });
+
+// $("#brand").select2({
+//     minimumInputLength: 2,          
+//     placeholder: ' Search!',
+//     cache:true,
+    //  ajax: {
+    //     dataType: 'json',
+    //     url: 'ajax.php',
+    //     delay: 400,
+    //     data: function(params) {
+    //         return {
+    //             term: params.term
+    //         }
+    //     },
+    //     processResults: function (data, page) {
+    //       return {
+    //         results: data.results
+    //       };
+    //     }
+    // }
+// });
+
+
+  

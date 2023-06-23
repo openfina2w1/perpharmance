@@ -50,10 +50,11 @@ class HomeController extends Controller
 
     public function get_product(Request $request)
     {
-        $productdetails = Productdetails::orderBy('proprietary_name', 'ASC')->paginate(10);
+        $name = $request['term'];
+        $productdetails = Productdetails::where('proprietary_name', 'LIKE', "%$name%")->orderBy('proprietary_name', 'ASC')->paginate(100);
         if ($request->ajax()) {
-    		$view = view('include.data', compact('productdetails'))->render();
-            return response()->json(['html'=>$view]);
+    		// $view = view('include.data', compact('productdetails'))->render();
+            return response()->json(["data" => $productdetails]);
         }
     }
 }

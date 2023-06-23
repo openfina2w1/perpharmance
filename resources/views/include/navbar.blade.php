@@ -7,21 +7,21 @@
         <!-- Dropdown-search Start-->
         <div class="header-dropdown-search">
             <div class="custom-dropdown">
+                <!-- <div class="dropdown"> -->
                 <div class="dropdown">
-                    <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
-                        All
-                    </a>
-                    
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="post-data" style="height:300px; overflow:auto;">
-                        @include('include.data')
-                    </ul>
+                    <!-- <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                        Brand
+                    </a> -->
+                    <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="post-data" style="height:300px; overflow:auto;"></ul> -->
+                    <!-- <li class="dropdown-item" href="#"></li> -->
+                    @include('include.data')
                     <div class="ajax-load" style="display:none">
                         <p><img src="{{ asset('admin/images/loader.gif') }}">Loading More post</p>
                     </div>
                 </div>
             </div>
             <div class="input-group search">
-                <input class="form-control" type="search" value="Product search - Natural language query" id="">
+                <input class="form-control" type="search" value="" id="" autofocus>
                 <span class="input-group-append">
                     <button class="btn border-start-0 border-bottom-0  ms-n5" type="button">
                         <i class="fa fa-search"></i>
@@ -31,7 +31,7 @@
         </div>
         <!-- Dropdown-search End-->
         <!-- Header Nav Start-->
-        <div class="header-nav">
+        <!-- <div class="header-nav">
             <ul>
                 @if($sidebar =='default-sidebar')
                     <li> <a href="#">Account</a></li>
@@ -43,11 +43,11 @@
                     <li> <a href="#">Company Info</a></li>
                 @endif
             </ul>
-        </div>
+        </div> -->
         <!-- Header Nav End-->
         <!-- Settings Start-->
         <div class="custom-dropdown-nobg">
-            <div class="dropdown">
+            <!-- <div class="dropdown">
                 <a class="btn dropdown-toggle" href="#" role="button" id="dropdownSetttings" data-bs-toggle="dropdown">
                     <i class="fa fa-cog" aria-hidden="true"></i>
                 </a>
@@ -57,7 +57,7 @@
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <!-- Settings End-->
         <!-- User Profile Start-->

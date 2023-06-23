@@ -1,7 +1,6 @@
-@if($sidebar == 'default-sidebar')
-
-@else
+<select id="brand" class="select2" data-rel="chosen">
+    <option>Brand</option>
     @foreach($productdetails as $productdetail_row)
-        <li class="dropdown-item" href="#">{{ $productdetail_row->proprietary_name }}</li>
+        <option value="{{ $productdetail_row->proprietary_name }}">{{ $productdetail_row->proprietary_name }}</option>
     @endforeach
-@endif
+</select>

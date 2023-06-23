@@ -17,6 +17,7 @@
     <!-- Date Piceker-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css">
     <!-- Date Piceker-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 </head>
     <body id="widget">
@@ -30,9 +31,8 @@
             </div>
         </div>
 
-        
 
-        <script src="{{ asset('admin/js//jquery.min.js') }}"></script>
+        <script src="{{ asset('admin/js//jquery.min.js') }}"></s>
         <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="{{ asset('admin/js/custom.js') }}"></script>
@@ -50,6 +50,7 @@
         <!-- multiselect -->
         <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
         <!-- multiselect -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
     </body>
 </html>
